@@ -3,9 +3,9 @@ using System;
 namespace helloworld
 {
 
-    public class Login
+    public class InitialLandingPage
     {
-        static void Main(string[] args)
+        public void LogonMain()
         {
             
             //initial landing page
@@ -21,7 +21,7 @@ namespace helloworld
             }while(Continue());
 
         }
-        public static bool Continue(){
+        public bool Continue(){
 
             Console.Write("\nDo you wish to continue to Staff Management Dashboard? (y/n) : ");
             string res = Console.ReadLine();
