@@ -19,6 +19,7 @@ namespace helloworld.DataBaseManipulatios
             sqlite_datareader = sqlite_cmd.ExecuteReader();
             while (sqlite_datareader.Read())
             {
+                
                 string myreader = sqlite_datareader.GetString(0);
                 Console.Write(myreader + "\t");
 
@@ -36,6 +37,7 @@ namespace helloworld.DataBaseManipulatios
 
                 myreader = sqlite_datareader.GetString(5);
                 Console.Write(myreader + "\t");
+                Console.WriteLine("\n");
             }
             conn.Close();
 
@@ -55,6 +57,7 @@ namespace helloworld.DataBaseManipulatios
             Boolean flag = false;
             while (sqlite_datareader.Read())
             {
+                
                 string myreader = sqlite_datareader.GetString(0);
                 Console.Write(myreader + "\t");
 
@@ -73,6 +76,7 @@ namespace helloworld.DataBaseManipulatios
                 myreader = sqlite_datareader.GetString(5);
                 Console.Write(myreader + "\t");
                 Console.WriteLine("\n");
+               
                 flag = true;
             }
             conn.Close();
