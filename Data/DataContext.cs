@@ -20,6 +20,6 @@ namespace Helloworld.Data{
         public DbSet<Staff> SupportStaffs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data source=D:\staffmanagement.db");
+            => options.UseSqlite("Data source= database.db");
     }
 }

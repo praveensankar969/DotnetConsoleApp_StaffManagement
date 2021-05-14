@@ -51,4 +51,3 @@ D:\work\DotNet\helloworld\bin\Debug\net5.0\runtimes\win-arm\native\e_sqlite3.dll
 D:\work\DotNet\helloworld\bin\Debug\net5.0\runtimes\win-arm64\native\e_sqlite3.dll
 D:\work\DotNet\helloworld\bin\Debug\net5.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\work\DotNet\helloworld\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
-D:\work\DotNet\helloworld\bin\Debug\net5.0\helloworld.dll.config

@@ -72,6 +72,7 @@ namespace helloworld.DataBaseManipulatios
 
                 myreader = sqlite_datareader.GetString(5);
                 Console.Write(myreader + "\t");
+                Console.WriteLine("\n");
                 flag = true;
             }
             conn.Close();
