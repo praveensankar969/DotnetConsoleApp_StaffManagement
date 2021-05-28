@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wxo7MR0KEgtLyY6Qc1tWwCe64Tozfk9NJM+opHKV+9r5euybjCcBfjpLgA8LsqtcBFwBD9y5OS+RgClHdaKelg==",
+  "dgSpecHash": "qUjRcQXiCJh6c8wIUXnzDOj1eL1vA708LzQT74PsCR+XhA6RwUbwG4TnGCQL8u3pFAWAwPZpeci8eCwNyXxDqA==",
   "success": true,
-  "projectFilePath": "D:\\work\\DotNet\\helloworld\\helloworld.csproj",
+  "projectFilePath": "C:\\D\\Work\\Dotnet\\DotnetConsoleApp_StaffManagement\\helloworld.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\sanka\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
@@ -26,6 +26,7 @@
     "C:\\Users\\sanka\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\sanka\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.0.4\\sqlitepclraw.bundle_e_sqlite3.2.0.4.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\sqlitepclraw.core\\2.0.4\\sqlitepclraw.core.2.0.4.nupkg.sha512",
     "C:\\Users\\sanka\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.0.4\\sqlitepclraw.lib.e_sqlite3.2.0.4.nupkg.sha512",
