@@ -62,9 +62,27 @@ namespace helloworld
                         }
                     case 2:
                         {
-                            Console.Write("Enter user name of staff to view : ");
-                            string name = Console.ReadLine();
-                            obj.ViewStaff(name);
+                            Console.Write("Enter Id of staff to view : ");
+                            string id = Console.ReadLine();
+                             Console.WriteLine("Fetching all Data\n");
+                            var client = new HttpClient();
+                            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://localhost:5001/api/staff/"+id);
+                            try
+                            {
+                                WebResponse response = request.GetResponse();
+                                using (Stream responseStream = response.GetResponseStream())
+                                {
+                                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                                    StaffView object1 = JsonConvert.DeserializeObject<StaffView>(reader.ReadToEnd());
+                                    Console.WriteLine("Data Read Success");
+                                    Console.Write("Name: " + object1.UserName);
+                                    Console.Write(" Phone: " + object1.PhoneNumber);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Error reading data from API: " + e.Message);
+                            }
                             break;
                         }
                     case 3:
