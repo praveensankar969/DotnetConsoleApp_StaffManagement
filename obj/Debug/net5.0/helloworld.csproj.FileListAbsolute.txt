@@ -105,3 +105,6 @@ C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\obj\Debug\net5.0\helloworld.dl
 C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\obj\Debug\net5.0\ref\helloworld.dll
 C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\obj\Debug\net5.0\helloworld.pdb
 C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\obj\Debug\net5.0\helloworld.genruntimeconfig.cache
+C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll

@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
+using StaffManagement.View;
 
-namespace helloworld
+namespace StaffManagement.View
 {
     public static class Logon
     {

@@ -1,12 +1,12 @@
 //not used here
-namespace StaffManagement{
-   public class Staff{
+namespace StaffManagement.DTO{
+   public class StaffDTO{
     
     public int Id { get; set; }
     public string UserName { get; set; } 
     public string Password { get; set; }
 
-    public string[]  Subjects { get; set; }
+    public string  Subject { get; set; }
 
     public int Experience { get; set; }
 

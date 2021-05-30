@@ -1,6 +1,6 @@
 using System;
 
-namespace helloworld
+namespace StaffManagement.View
 {
 
     public class InitialLandingPage

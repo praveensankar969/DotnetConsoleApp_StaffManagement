@@ -1,6 +1,7 @@
 using System;
+using StaffManagement.View;
 
-namespace helloworld{ 
+namespace StaffManagement{ 
     public class Startup{ 
         public static void Main(string[] args){ 
            
