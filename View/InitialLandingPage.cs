@@ -12,9 +12,8 @@ namespace StaffManagement.View
             do{
                 Console.Clear();
             Console.WriteLine("\t\tStaff Management System");
-            Console.WriteLine("1. Admin logon");
+            Console.WriteLine("1. Staff logon");
             Console.WriteLine("2. Teaching Staff logon");
-            Console.WriteLine("3. Support Staff logon");
             Console.Write("Enter your choice now: ");
             int selectedOption = Convert.ToInt32(Console.ReadLine());
             Logon.LogonScreen(selectedOption);

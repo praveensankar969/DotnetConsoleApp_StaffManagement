@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Data.Sqlite;
+using StaffManagement.DTO;
 using StaffManagement.View;
 
 namespace StaffManagement.View
@@ -11,15 +12,11 @@ namespace StaffManagement.View
             AdminCapability user = new AdminCapability();
             switch (selectedOption){
                 case 1:{
-                     user.AdminActions("Admin");
+                     user.AdminActions("staff");
                      break;
                 }
                 case 2:{
-                    user.AdminActions("Staff");
-                    break;
-                }
-                case 3:{
-                    user.AdminActions("Support");
+                    user.AdminActions("teacher");
                     break;
                 }
                 default:{

@@ -1,8 +1,12 @@
-using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using StaffManagement.DTO;
+
 namespace StaffManagement.DTO
 {
-    public class StaffDTO
+    public class TeacherDTO 
     {
+
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -14,7 +18,6 @@ namespace StaffManagement.DTO
 
         public string PhoneNumber { get; set; }
 
+
     }
-
-
 }

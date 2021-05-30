@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace StaffManagement.View{
-     public class StaffView{
+     public class TeacherView{
     
     public int Id { get; set; }
     public string UserName { get; set; } 
