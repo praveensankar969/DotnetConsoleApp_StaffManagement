@@ -1,35 +1,30 @@
 using System;
-using System.Net.Http;
-using StaffManagement.DTO;
+using DotnetConsoleApp_StaffManagement.Controller;
+using DotnetConsoleApp_StaffManagement.DTO;
+using DotnetConsoleApp_StaffManagement.Interfaces;
+using DotnetConsoleApp_StaffManagement.Service;
 using StaffManagement.Controller;
-using Microsoft.VisualBasic.CompilerServices;
+using StaffManagement.DTO;
 
 namespace StaffManagement.View
 {
-
-    public class AdminCapability 
+    public class AdminCapability
     {
-        public Type GetTypeOfStaff(string type){
-            if(type.Equals("Staff")){
-                return typeof(StaffDTO);
-            }
-            return typeof(TeacherDTO);
-        }
-        public void AdminActions(string staffType)
+        public void AdminActions(User user)
         {
-                      
-            ClientControl client = new ClientControl(new HttpClient(), staffType);
+            Admin client = new AdminControl();
+            StaffController controller = new StaffController();
+            int latestId = IdCalculate.ComputeId();
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t" + staffType + " Dashboard");
+                Console.WriteLine("\t\t Admin Dashboard");
                 Console.WriteLine("1. View all Staffs");
                 Console.WriteLine("2. View Staff Details");
                 Console.WriteLine("3. Add Staff Details");
                 Console.WriteLine("4. Edit Staff Details");
                 Console.WriteLine("5. Delete Staff");
                 Console.WriteLine("6. Exit Application");
-
 
                 Console.Write("Enter your choice now: ");
                 int selectedOption = Convert.ToInt32(Console.ReadLine());
@@ -39,29 +34,133 @@ namespace StaffManagement.View
                     case 1:
                         {
                             Console.WriteLine("Fetching all Data\n");
-                            client.GetAllStaff();                           
+                            client.GetAllStaff(user.Admin);
                             break;
                         }
                     case 2:
                         {
                             Console.Write("Enter Id of staff to view : ");
                             string id = Console.ReadLine();
-                            client.GetStaff(id);
+                            client.GetStaff(user.Admin, Convert.ToInt32(id));
                             break;
                         }
                     case 3:
                         {
+                            if (user.Admin)
+                            {
+                                Console.WriteLine("Enter details of staff");
+                                var staff = new Staff();
+                                staff.Id = latestId;
+
+                                Console.Write("UserName: ");
+                                staff.UserName = Console.ReadLine();
+
+                                Console.Write("Password: ");
+                                staff.Password = Console.ReadLine();
+
+                                Console.Write("Subject: ");
+                                staff.Subject = Console.ReadLine();
+
+                                Console.Write("Experience: ");
+                                staff.Experience = Convert.ToInt32(Console.ReadLine());
+
+                                Console.Write("Phone: ");
+                                staff.PhoneNumber = Console.ReadLine();
+
+                                Console.Write("Date of Joining: ");
+                                staff.DateOfJoining = Console.ReadLine();
+
+                                staff.Admin = false;
+
+                                client.AddStaff(user.Admin, staff);
+                            }
+                            else
+                            {
+                                Console.WriteLine("No Access");
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            int id = user.Id;
+                            var staffDTO = new StaffUpdateDTO();
+                            //limiting to one edit at a time
+                            if (user.Admin)
+                            {
+                                Console.WriteLine("Enter Id of staff to edit");
+                                id = Convert.ToInt32(Console.ReadLine());
+                            }
+                            Console.WriteLine("Enter property name and new value");
+                            do
+                            {
+                                Console.Write("Enter one property to edit: (UserName , Password , Subject , Experience, Phone, DateOfJoining): ");
+                                var property = Console.ReadLine();
+                                Console.Write("Enter new value: ");
+                                var value = Console.ReadLine();
+                                var staffObj = new StaffUpdateDTO();
+                                var propInfo = staffObj.GetType().GetProperty(property);
+                                if (propInfo == null)
+                                {
+                                    Console.WriteLine("Wrong PropertyName");
+                                    break;
+                                }
+                                propInfo.SetValue(staffObj, value);
+
+                                client.EditStaff(user, id, staffObj);
+
+                            } while (Continue("edit"));
+                            break;
+                        }
+                    case 5:
+                        {
+                            Console.WriteLine("Enter details of staff to delete");
+                            Console.Write("Enter Id of staff: ");
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            client.DeleteStaff(user, id);
+                            break;
+                        }
+                    case 6:
+                        {
+                            Environment.Exit(0);
+                            break;
+                        }
+
+                    default:
+                        {
+                            Console.WriteLine("Invalid choice, Retuning to Dashboard");
+                            break;
+                        }
+
+                }
+
+            } while (Continue());
+        }
+
+
+        public void StaffAction()
+        {
+
+            StaffInt client = new StaffController();
+            int latestId = IdCalculate.ComputeId();
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\t\t Staff Dashboard");
+                Console.WriteLine("1. Add New Staff");
+                Console.WriteLine("2. Edit Details");
+                Console.WriteLine("3. Delete Data");
+                Console.WriteLine("4. Exit Application");
+
+                Console.Write("Enter your choice now: ");
+                int selectedOption = Convert.ToInt32(Console.ReadLine());
+
+                switch (selectedOption)
+                {
+                    case 1:
+                        {
                             Console.WriteLine("Enter details of staff");
-                            dynamic staff = null;
-                            if(staffType.Equals("staff")){
-                                staff = Activator.CreateInstance<StaffDTO>();
-                            }
-                            else{
-                                staff = Activator.CreateInstance<TeacherDTO>();
-                            }
-                           
-                            Console.Write("ID: ");
-                            staff.Id = Convert.ToInt32(Console.ReadLine());
+                            var staff = new Staff();
+                            staff.Id = latestId;
 
                             Console.Write("UserName: ");
                             staff.UserName = Console.ReadLine();
@@ -81,38 +180,41 @@ namespace StaffManagement.View
                             Console.Write("Date of Joining: ");
                             staff.DateOfJoining = Console.ReadLine();
 
+                            staff.Admin = false;
+
                             client.AddStaff(staff);
                             break;
                         }
-                    case 4:
+                    case 2:
                         {
-                            dynamic staffDTO = null;
-                            if(staffType.Equals("staff")){
-                                staffDTO = Activator.CreateInstance<StaffUpdateDTO>();
-                            }
-                            else{
-                                staffDTO = Activator.CreateInstance<TeacherUpdateDTO>();
-                            }
-                            //limiting to one edit at a time
-                            Console.WriteLine("Enter details of staff to edit details");
-                            Console.Write("Enter Id of staff: ");
-                            staffDTO.Id = Convert.ToInt32(Console.ReadLine());
+                            var staffDTO = new StaffUpdateDTO();
                             do
                             {
-                                Console.Write("Enter one property to edit: (Username , Password , Subject , Experience, Phone, Date of Joining): ");
-                                staffDTO.Property = Console.ReadLine();
+                                Console.Write("Enter one property to edit: (UserName , Password , Subject , Experience, Phone, DateOfJoining): ");
+                                var property = Console.ReadLine();
                                 Console.Write("Enter new value: ");
-                                staffDTO.PropertyValue = Console.ReadLine();
-                                client.EditStaff(staffDTO);
-                            } while (Continue());
+                                var value = Console.ReadLine();
+                                var staffObj = new StaffUpdateDTO();
+                                var propInfo = staffObj.GetType().GetProperty(property);
+                                if (propInfo == null)
+                                {
+                                    Console.WriteLine("Wrong PropertyName");
+                                    break;
+                                }
+                                propInfo.SetValue(staffObj, value);
+                                client.EditStaff(latestId, staffObj);
+
+                            } while (Continue("edit"));
                             break;
                         }
                     case 5:
                         {
-                            Console.WriteLine("Enter details of staff to delete");
-                            Console.Write("Enter Id of staff: ");
-                            int id = Convert.ToInt32(Console.ReadLine());
-                            client.DeleteStaff(id);
+                            Console.WriteLine("Are you Sure you want to delete your account? (Y/N)");
+                            string ree = Console.ReadLine();
+                            if (ree.Equals("Y") || ree.Equals("y"))
+                            {
+                                client.DeleteStaff(latestId);
+                            }
                             break;
                         }
                     case 6:
@@ -129,18 +231,20 @@ namespace StaffManagement.View
 
                 }
 
-            } while (Continue(staffType));
+            } while (Continue());
+
+
         }
 
-        public bool Continue(string staffType)
+        public bool Continue()
         {
 
-            Console.Write("\nDo you wish to continue with " + staffType + " dashboard ? (y/n): ");
+            Console.Write("\nDo you wish to continue operations in this dashboard ? (y/n): ");
             string res = Console.ReadLine();
             return res == "y" || res == "Y" ? true : false;
         }
 
-        public static bool Continue()
+        public static bool Continue(string edit)
         {
 
             Console.Write("\nDo you wish to edit another detail of this staff? (y/n) : ");

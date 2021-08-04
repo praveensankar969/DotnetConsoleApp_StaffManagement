@@ -12,8 +12,8 @@ namespace StaffManagement.View
             do{
                 Console.Clear();
             Console.WriteLine("\t\tStaff Management System");
-            Console.WriteLine("1. Staff logon");
-            Console.WriteLine("2. Teaching Staff logon");
+            Console.WriteLine("1. Staff Logon");
+            Console.WriteLine("2. Staff Signup");
             Console.Write("Enter your choice now: ");
             int selectedOption = Convert.ToInt32(Console.ReadLine());
             Logon.LogonScreen(selectedOption);
@@ -22,7 +22,7 @@ namespace StaffManagement.View
         }
         public bool Continue(){
 
-            Console.Write("\nDo you wish to continue to Staff Management Dashboard? (y/n) : ");
+            Console.Write("\nDo you wish to continue to Logon Page? (y/n) : ");
             string res = Console.ReadLine();
             return res=="y" || res=="Y" ? true:false;
         }

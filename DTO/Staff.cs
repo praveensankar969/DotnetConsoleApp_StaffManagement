@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace StaffManagement.View{
-     public class TeacherView{
+//not used here
+namespace StaffManagement{
+   public class Staff{
     
     public int Id { get; set; }
     public string UserName { get; set; } 
@@ -16,5 +14,9 @@ namespace StaffManagement.View{
 
     public string PhoneNumber { get; set; }
 
+    public bool Admin {get; set;}
+
    }
+    
+
 }
