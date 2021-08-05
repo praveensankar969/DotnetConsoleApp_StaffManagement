@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DotnetConsoleApp_StaffManagement.DTO;
+using DotnetConsoleApp_StaffManagement.Interfaces;
 using Newtonsoft.Json;
 
 namespace StaffManagement
 {
-    public abstract class Staff
+    public abstract class Staff 
     {
         string filePath = @"C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\DataStore.json";
 

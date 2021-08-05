@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DotnetConsoleApp_StaffManagement.DTO;
+using DotnetConsoleApp_StaffManagement.Interfaces;
 using Newtonsoft.Json;
 using StaffManagement;
 
 namespace DotnetConsoleApp_StaffManagement.Controller
 {
-    public class NonAdminStaff : Staff
+    public class NonAdminStaff : Staff, Actions
     {
         string filePath = @"C:\D\Work\Dotnet\DotnetConsoleApp_StaffManagement\DataStore.json";
         public override void AddStaff()

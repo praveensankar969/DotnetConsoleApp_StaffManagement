@@ -1,6 +1,8 @@
+using DotnetConsoleApp_StaffManagement.Interfaces;
+
 namespace DotnetConsoleApp_StaffManagement.DTO
 {
-    public class Modal
+    public class Modal 
     {
         public int Id { get; set; }
         public string UserName { get; set; }
