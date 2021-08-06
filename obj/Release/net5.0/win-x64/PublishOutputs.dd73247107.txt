@@ -1,7 +1,0 @@
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\helloworld.pdb
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\clrcompression.dll
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\clrjit.dll
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\coreclr.dll
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\mscordaccore.dll
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\e_sqlite3.dll
-D:\work\DotNet\helloworld\work\DotNet\helloworld\exe\helloworld.exe
