@@ -1,0 +1,52 @@
+[
+  {
+    "Type": "Admin",
+    "Id": 101,
+    "UserName": "Praveen",
+    "Password": "password",
+    "Experience": 10,
+    "DateOfJoining": "2021-08-06T17:30:00",
+    "PhoneNumber": "2342342300",
+    "Subject": "Maths"
+  },
+  {
+    "Type": "Teaching Staff",
+    "Id": 2,
+    "UserName": "Test Staff",
+    "Password": "pass",
+    "Experience": 1,
+    "DateOfJoining": "2021-08-06T17:30:00",
+    "PhoneNumber": "1123410000",
+    "Subject": "maths"
+  },
+  {
+    "Type": "Teaching Staff",
+    "Id": 3,
+    "UserName": "Test",
+    "Password": "123",
+    "Experience": 1,
+    "DateOfJoining": "2021-08-06T17:30:00",
+    "PhoneNumber": "3412341200",
+    "Subject": "adsfds"
+  },
+  {
+    "Type": "Teaching Staff",
+    "Id": 4,
+    "UserName": "Test3",
+    "Password": "pass3",
+    "Experience": 12,
+    "DateOfJoining": "2021-08-01T00:00:00",
+    "PhoneNumber": "1233211230",
+    "Subject": "Maths"
+  },
+  {
+    "Type": "Teaching Staff",
+    "Id": 5,
+    "UserName": "Test5",
+    "Password": "pass",
+    "Experience": 10,
+    "DateOfJoining": "2021-08-04T00:00:00",
+    "PhoneNumber": "1233211230",
+    "Subject": "Maths"
+  }
+]

@@ -31,7 +31,7 @@ namespace StaffManagement.View
                             var staffs = admin.GetStaff();
                             for (int i = 0; i < staffs.Count; i++)
                             {
-                                Console.WriteLine("Name: " + staffs[i].UserName + " \tDate of Joining: " + staffs[i].DateOfJoining + " \tExperience: " + staffs[i].Experience + " \tPhone: " + staffs[i].PhoneNumber);
+                                Console.WriteLine("Name: " + staffs[i].UserName + " \tDate of Joining: " + staffs[i].DateOfJoining + " \tExperience: " + staffs[i].Experience + " \tPhone: " + staffs[i].PhoneNumber+ " \tStaff Type: " + staffs[i].Type);
                             }
                             break;
                         }
@@ -76,13 +76,62 @@ namespace StaffManagement.View
             } while (Continue());
         }
 
-        public void StaffAction(User user)
+        public void TeachingStaffAction(User user)
         {
-            NonAdminStaff staff = new NonAdminStaff();
+            TeachingStaff staff = new TeachingStaff();
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t Staff Dashboard");
+                Console.WriteLine("\t\t Teaching Staff Dashboard");
+                Console.WriteLine("1. Add New Staff");
+                Console.WriteLine("2. Edit your details");
+                Console.WriteLine("3. Delete your data");
+                Console.WriteLine("4. Exit Application");
+
+                Console.Write("Enter your choice now: ");
+                int selectedOption = Convert.ToInt32(Console.ReadLine());
+
+                switch (selectedOption)
+                {
+                    case 1:
+                        {
+                            staff.AddStaff();
+                            break;
+                        }
+                    case 2:
+                        {
+                            staff.EditStaffDetail(user.Id);
+                            break;
+                        }
+                    case 3:
+                        {
+                            staff.DeleteStaff(user.Id);
+                            break;
+                        }
+                    case 4:
+                        {
+                            Environment.Exit(0);
+                            break;
+                        }
+
+                    default:
+                        {
+                            Console.WriteLine("Invalid choice, Retuning to Dashboard");
+                            break;
+                        }
+
+                }
+
+            } while (Continue());
+        }
+
+         public void SupportStaffAction(User user)
+        {
+            SupportStaff staff = new SupportStaff();
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\t\t Support Staff Dashboard");
                 Console.WriteLine("1. Add New Staff");
                 Console.WriteLine("2. Edit your details");
                 Console.WriteLine("3. Delete your data");

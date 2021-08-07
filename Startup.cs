@@ -1,3 +1,4 @@
+
 using System;
 using StaffManagement.View;
 
@@ -7,6 +8,7 @@ namespace StaffManagement{
            
             InitialLandingPage logon = new InitialLandingPage();
             logon.LogonMain();
+            //Console.WriteLine(DateTime.Now);
         }
     }
 }
