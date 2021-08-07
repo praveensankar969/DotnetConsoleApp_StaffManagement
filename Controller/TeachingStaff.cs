@@ -1,37 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
 using DotnetConsoleApp_StaffManagement.DTO;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+using Procedure;
 using StaffManagement;
+using StaffManagement.View;
 
 namespace DotnetConsoleApp_StaffManagement.Controller
 {
     public class TeachingStaff : Staff
     {
         private static IConfiguration _iconfiguration;
-        string filePath = @"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json";
-        
         public override void AddStaff()
         {
             base.AddStaff();
             Console.Write("Subject: ");
             Subject = Console.ReadLine();
             Type = "Teaching Staff";
-            
-            var json = File.ReadAllText(filePath);
-            List<TeachingStaff> staffs = JsonConvert.DeserializeObject<List<TeachingStaff>>(json);
-            staffs.Add(this);
-            string jsonResult = JsonConvert.SerializeObject(staffs);
-            File.WriteAllText(filePath, jsonResult);
-
+            SQLProcedure obj = new SQLProcedure();
+            obj.Insert(this);
+            InitialLandingPage.LogonMain();
         }
 
-        public override void EditStaffDetail(int id, string defaultText = "")
+        public override void EditStaffDetail<T>(T staff, string defaultText = "")
         {
-            string editOptionText = "Enter one property to edit: (UserName , Password , Subject , Experience, Phone, DateOfJoining): ";
-            base.EditStaffDetail(id, editOptionText);
+            string editOptionText = "Enter one property to edit: (UserName , Password , Subject , Experience, PhoneNumber, DateOfJoining): ";
+            base.EditStaffDetail(staff, editOptionText);
         }
 
     }

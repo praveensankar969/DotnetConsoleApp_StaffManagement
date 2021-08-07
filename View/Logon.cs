@@ -1,6 +1,7 @@
 ﻿using System;
 using DotnetConsoleApp_StaffManagement.Controller;
 using DotnetConsoleApp_StaffManagement.DTO;
+using Procedure;
 
 namespace StaffManagement.View
 {
@@ -16,18 +17,13 @@ namespace StaffManagement.View
             Console.WriteLine();
             Console.Write("Enter Password: ");
             string pass = Console.ReadLine();
-            var res = Service.StaffService.Login(new DotnetConsoleApp_StaffManagement.DTO.LoginDTO { UserName = username, Password = pass });
+            SQLProcedure obj = new SQLProcedure();
+            User res = obj.Login(username, pass);
 
             switch (res.Type)
             {
                 case "Admin":
                     {
-                        if (res.Id < 1)
-                        {
-                            Console.WriteLine("Invalid username or password");
-                            break;
-                        }
-
                         user.AdminActions();
                         break;
                     }
@@ -43,7 +39,7 @@ namespace StaffManagement.View
                     }
                 default:
                     {
-                        Console.WriteLine("Invalid Input, Start Over!!");
+                        Console.WriteLine("Wrong username or password");
                         break;
                     }
             }
@@ -61,18 +57,12 @@ namespace StaffManagement.View
                     {
                         TeachingStaff obj = new TeachingStaff();
                         obj.AddStaff();
-                        StaffCapability sObj = new StaffCapability();
-                        int id = Service.StaffService.ComputeId() - 1;
-                        sObj.TeachingStaffAction(new User { Id = id, Type = "Teaching Staff" });
                         break;
                     }
                 case 2:
                     {
                         SupportStaff obj = new SupportStaff();
                         obj.AddStaff();
-                        StaffCapability sObj = new StaffCapability();
-                        int id = Service.StaffService.ComputeId() - 1;
-                        sObj.SupportStaffAction(new User { Id = id, Type = "Support Staff" });
                         break;
                     }
             }

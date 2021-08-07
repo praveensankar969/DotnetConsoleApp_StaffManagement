@@ -1,15 +1,12 @@
 using System;
-using DotnetConsoleApp_StaffManagement.DTO;
 using StaffManagement;
-using System.IO;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+using Procedure;
 
 namespace DotnetConsoleApp_StaffManagement.Controller
 {
     public class AdminStaff : Staff
     {
-        string filePath = @"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json";
+        
         public override void AddStaff()
         {     
             base.AddStaff();
@@ -22,20 +19,16 @@ namespace DotnetConsoleApp_StaffManagement.Controller
                 Subject = Console.ReadLine();
             }
 
-            var json = File.ReadAllText(filePath);
-            List<AdminStaff> staffs = JsonConvert.DeserializeObject<List<AdminStaff>>(json);
-            staffs.Add(this);
-            string jsonResult = JsonConvert.SerializeObject(staffs);
-            File.WriteAllText(filePath, jsonResult);
+            SQLProcedure obj = new SQLProcedure();
+            obj.Insert(this);
             
         }
 
-        public override void EditStaffDetail(int id, string defaultText="")
-        {
-            string editOptionText = "Enter one property to edit: (UserName , Password , Subject , Experience, Phone, DateOfJoining, Type): ";
-            base.EditStaffDetail(id, editOptionText);
+        public override void EditStaffDetail<T>(T staff, string defaultText="")
+        {   
+            string editOptionText = "Enter one property name to edit: (UserName , Password , Subject , Experience, PhoneNumber, DateOfJoining, Type): ";
+            base.EditStaffDetail(staff, editOptionText);
         }
-
        
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using DotnetConsoleApp_StaffManagement.Controller;
 using DotnetConsoleApp_StaffManagement.DTO;
+using Procedure;
 
 namespace StaffManagement.View
 {
@@ -28,11 +29,7 @@ namespace StaffManagement.View
                     case 1:
                         {
                             Console.WriteLine("Fetching all Data\n");
-                            var staffs = admin.GetStaff();
-                            for (int i = 0; i < staffs.Count; i++)
-                            {
-                                Console.WriteLine("Name: " + staffs[i].UserName + " \tDate of Joining: " + staffs[i].DateOfJoining + " \tExperience: " + staffs[i].Experience + " \tPhone: " + staffs[i].PhoneNumber+ " \tStaff Type: " + staffs[i].Type);
-                            }
+                            admin.GetStaff();
                             break;
                         }
                     case 2:
@@ -49,7 +46,9 @@ namespace StaffManagement.View
                         {
                             Console.WriteLine("Enter Id of staff to edit");
                             int id = Convert.ToInt32(Console.ReadLine());
-                            admin.EditStaffDetail(id);
+                            SQLProcedure obj = new SQLProcedure();
+                            AdminStaff eStaff = obj.GetDataOfId(id);
+                            admin.EditStaffDetail(eStaff);
                             break;
                         }
                     case 5:
@@ -79,6 +78,7 @@ namespace StaffManagement.View
         public void TeachingStaffAction(User user)
         {
             TeachingStaff staff = new TeachingStaff();
+            staff.Id = user.Id;
             do
             {
                 Console.Clear();
@@ -100,7 +100,7 @@ namespace StaffManagement.View
                         }
                     case 2:
                         {
-                            staff.EditStaffDetail(user.Id);
+                            staff.EditStaffDetail(staff);
                             break;
                         }
                     case 3:
@@ -128,6 +128,7 @@ namespace StaffManagement.View
          public void SupportStaffAction(User user)
         {
             SupportStaff staff = new SupportStaff();
+            staff.Id = user.Id;
             do
             {
                 Console.Clear();
@@ -149,7 +150,7 @@ namespace StaffManagement.View
                         }
                     case 2:
                         {
-                            staff.EditStaffDetail(user.Id);
+                            staff.EditStaffDetail(staff);
                             break;
                         }
                     case 3:

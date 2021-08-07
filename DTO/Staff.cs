@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
+using Procedure;
 
 namespace StaffManagement
 
@@ -75,32 +76,24 @@ namespace StaffManagement
             }
         }
         public string Subject { get; set; }
-        public string Type;
+        public string Type { get; set; }
 
 
-        public List<Staff> GetStaff()
+        public void GetStaff()
         {
-            var json = File.ReadAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json");
-            List<Staff> staffs = JsonConvert.DeserializeObject<List<Staff>>(json);
-            return staffs;
+            SQLProcedure obj = new SQLProcedure();
+            obj.GetAllData();
         }
         public void GetStaffWithID()
         {
             Console.Write("Enter Id of staff to view : ");
             int id = Convert.ToInt32(Console.ReadLine());
-            var json = File.ReadAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json");
-            List<Staff> staffs = JsonConvert.DeserializeObject<List<Staff>>(json);
-            var res = staffs.FirstOrDefault(x => x.Id == id);
-            Console.WriteLine("Details of Staff " + id + " are:");
-            Console.WriteLine("Name: " + res.UserName + " \tDate of Joining: " + res.DateOfJoining + " \tExperience: " + res.Experience + " \tSubject: " + res.Subject + " \tPhone: " + res.PhoneNumber + " \tType: " + res.Type);
+            SQLProcedure obj = new SQLProcedure();
+            obj.GetDataOfId(id);
         }
         public virtual void AddStaff()
         {
-            int id = Service.StaffService.ComputeId();
-
             Console.WriteLine("Enter details of new staff");
-
-            Id = id;
 
             Console.Write("UserName: ");
             UserName = Console.ReadLine();
@@ -151,100 +144,98 @@ namespace StaffManagement
 
 
         }
-        public virtual void EditStaffDetail(int id, string text)
+        public virtual void EditStaffDetail<T>(T classObj, string text)
         {
             do
             {
-                var json = File.ReadAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json");
-                List<Staff> staffs = JsonConvert.DeserializeObject<List<Staff>>(json);
-                var res = staffs.FirstOrDefault(x => x.Id == id);
-
-                if (res != null)
+                int exp;
+                bool flag = false;
+                Console.Write(text);
+                var property = Console.ReadLine();
+                var propInfo = classObj.GetType().GetProperty(property);
+                if (propInfo == null)
                 {
-                    int exp;
-                    Console.Write(text);
-                    var property = Console.ReadLine();
-                    var propInfo = res.GetType().GetProperty(property);
-                    if (propInfo == null)
+                    Console.WriteLine("Wrong PropertyName");
+                    break;
+                }
+
+
+                if (property == "Experience")
+                {
+                    do
                     {
-                        Console.WriteLine("Wrong PropertyName");
-                        break;
-                    }
-                    Console.Write("Enter new value: ");
-                    if (property == "Experience")
-                    {
+                        flag = true;
+                        Console.Write("Enter new value: ");
                         while (!int.TryParse(Console.ReadLine(), out exp))
                         {
                             Console.Write("This is an invalid input, please enter a number: ");
                         }
                         try
                         {
-                            propInfo.SetValue(res, exp);
+                            propInfo.SetValue(classObj, exp);
+
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine(e.Message);
+                            flag = false;
 
                         }
+                    } while (!flag);
 
-                    }
-                    else if (property == "DateOfJoining")
+                }
+                else if (property == "DateOfJoining")
+                {
+
+                    do
                     {
+                        flag = true;
+                        Console.Write("Enter new value: ");
                         var value = DateTime.Parse(Console.ReadLine());
                         try
                         {
-                            propInfo.SetValue(res, value);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    }
-                    else
-                    {
-                        var value = Console.ReadLine();
-                        try
-                        {
-                            propInfo.SetValue(res, value);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-                    }
+                            propInfo.SetValue(classObj, value);
 
-                    string jsonResult = JsonConvert.SerializeObject(staffs);
-                    File.WriteAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json", jsonResult);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            flag = false;
+                        }
+                    }
+                    while (!flag);
                 }
                 else
                 {
-                    Console.WriteLine("No Data to Edit");
-                    break;
+                    do
+                    {
+                        flag = true;
+                        Console.Write("Enter new value: ");
+                        var value = Console.ReadLine();
+                        try
+                        {
+                            propInfo.SetValue(classObj, value);
+
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                            flag = false;
+                        }
+                    }
+                    while (!flag);
                 }
             } while (Continue("edit"));
+
+            SQLProcedure obj = new SQLProcedure();
+            obj.Update(classObj);
+
         }
         public void DeleteStaff(int id)
         {
-            var json = File.ReadAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json");
-            List<Staff> staffs = JsonConvert.DeserializeObject<List<Staff>>(json);
-            var res = staffs.FirstOrDefault(x => x.Id == id);
-            if (res == null)
-            {
-                Console.WriteLine("No Data to delete");
-            }
-            else
-            {
-                staffs.Remove(res);
-                string jsonResult = JsonConvert.SerializeObject(staffs);
-                File.WriteAllText(@"C:\D\Work\Dotnet\StaffManagement\DotnetConsoleApp_StaffManagement\DataStore.json", jsonResult);
-            }
+            SQLProcedure obj = new SQLProcedure();
+            obj.DeleteDataOfId(id);
         }
-
-
-
-
-
-
 
 
         public static bool Continue(string edit)
